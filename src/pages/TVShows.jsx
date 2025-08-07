@@ -4,8 +4,6 @@ import { getPopularTVShows, getTopRatedTVShows, getTVShowsByGenre, formatContent
 import Header from "../components/ui/header";
 import TVShowRow from "../components/ui/TVShowRow";
 import HeroSection from "../components/ui/HeroSection";
- 
-
 
 
 export default function TVShows() {

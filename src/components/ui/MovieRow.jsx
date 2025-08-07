@@ -17,8 +17,6 @@ const MovieRow = ({ title, movies, loading }) => {
         setScrollPosition(Math.min(maxScroll, scrollPosition + 1560));
     };
 
-    console.log(`Rendering ${title} with movies:`, movies.map(m => m.title));
-
     if (loading) {
         return (
             <div className="mb-8">

@@ -3,7 +3,7 @@ const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
 const getApiKey = () => {
   return (
-    import.meta.env.VITE_TMDB_API_KEY || "7076ebfb043164c03de784f2a8b084f9"
+    import.meta.env.VITE_TMDB_API_KEY || "NA"
   );
 };
 
@@ -56,7 +56,6 @@ const tmdbFetch = async (endpoint, params = {}) => {
 
       const data = await response.json();
       if (attempt > 1) {
-        console.log(`TMDB API call succeeded on attempt ${attempt}`);
         console.log("API response:", data.results?.map(item => ({
           title: item.title || item.name,
           poster_path: item.poster_path
@@ -255,7 +254,6 @@ export const getImageUrl = (path, size = "w500") => {
     return "https://placehold.co/500x750?text=No+Image";
   }
   const url = `${TMDB_IMAGE_BASE_URL}/${size}${path}`;
-  console.log("Generated image URL:", url);
   return url;
 };
 
@@ -268,83 +266,47 @@ export const getBackdropUrl = (path, size = "w1280") => {
 };
 
 export const getTrending = async (mediaType = "all", timeWindow = "week") => {
-  const data = await tmdbFetch(`/trending/${mediaType}/${timeWindow}`); // Reverted to API
-  console.log("Trending API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
+  const data = await tmdbFetch(`/trending/${mediaType}/${timeWindow}`); 
   return data;
 };
 
 export const getPopularMovies = async (page = 1) => {
   const data = await tmdbFetch("/movie/popular", { page: page.toString() });
-  console.log("Popular movies API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getPopularTVShows = async (page = 1) => {
   const data = await tmdbFetch("/tv/popular", { page: page.toString() });
-  console.log("Popular TV shows API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getTopRatedMovies = async (page = 1) => {
   const data = await tmdbFetch("/movie/top_rated", { page: page.toString() });
-  console.log("Top rated movies API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getTopRatedTVShows = async (page = 1) => {
   const data = await tmdbFetch("/tv/top_rated", { page: page.toString() });
-  console.log("Top rated TV shows API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getUpcomingMovies = async (page = 1) => {
   const data = await tmdbFetch("/movie/upcoming", { page: page.toString() });
-  console.log("Upcoming movies API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getNowPlayingMovies = async (page = 1) => {
   const data = await tmdbFetch("/movie/now_playing", { page: page.toString() });
-  console.log("Now playing movies API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getTVShowsAiringToday = async (page = 1) => {
   const data = await tmdbFetch("/tv/airing_today", { page: page.toString() });
-  console.log("TV shows airing today API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getTVShowsOnTheAir = async (page = 1) => {
   const data = await tmdbFetch("/tv/on_the_air", { page: page.toString() });
-  console.log("TV shows on the air API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
@@ -352,20 +314,12 @@ export const getMovieDetails = async (movieId) => {
   const data = await tmdbFetch(`/movie/${movieId}`, {
     append_to_response: "credits,videos,similar",
   });
-  console.log("Movie details API response:", {
-    title: data.title,
-    poster_path: data.poster_path
-  });
   return data;
 };
 
 export const getTVShowDetails = async (tvId) => {
   const data = await tmdbFetch(`/tv/${tvId}`, {
     append_to_response: "credits,videos,similar",
-  });
-  console.log("TV show details API response:", {
-    title: data.name,
-    poster_path: data.poster_path
   });
   return data;
 };
@@ -376,10 +330,6 @@ export const getMoviesByGenre = async (genreId, page = 1) => {
     page: page.toString(),
     sort_by: "popularity.desc",
   });
-  console.log(`Movies by genre ${genreId} API response:`, data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
@@ -389,28 +339,16 @@ export const getTVShowsByGenre = async (genreId, page = 1) => {
     page: page.toString(),
     sort_by: "popularity.desc",
   });
-  console.log(`TV shows by genre ${genreId} API response:`, data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getSimilarMovies = async (movieId) => {
   const data = await tmdbFetch(`/movie/${movieId}/similar`);
-  console.log("Similar movies API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getSimilarTVShows = async (tvId) => {
   const data = await tmdbFetch(`/tv/${tvId}/similar`);
-  console.log("Similar TV shows API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
@@ -419,22 +357,16 @@ export const searchMulti = async (query, page = 1) => {
     query: encodeURIComponent(query),
     page: page.toString(),
   });
-  console.log("Search multi API response:", data.results.map(item => ({
-    title: item.title || item.name,
-    poster_path: item.poster_path
-  })));
   return data;
 };
 
 export const getMovieGenres = async () => {
   const data = await tmdbFetch("/genre/movie/list");
-  console.log("Movie genres API response:", data.genres);
   return data;
 };
 
 export const getTVGenres = async () => {
   const data = await tmdbFetch("/genre/tv/list");
-  console.log("TV genres API response:", data.genres);
   return data;
 };
 

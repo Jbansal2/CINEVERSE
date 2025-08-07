@@ -61,7 +61,6 @@ const AutoScrollHeroSection = ({ heroContent }) => {
                         src={content.backdrop}
                         alt={content.title}
                         className="w-full h-full object-cover"
-                        onLoad={() => console.log(`Backdrop loaded for ${content.title}: ${content.backdrop}`)}
                         onError={(e) => {
                             console.error(`Backdrop failed to load for ${content.title}: ${content.backdrop}`);
                             e.target.src = 'https://placehold.co/1200x675?text=No+Image';

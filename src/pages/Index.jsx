@@ -41,7 +41,6 @@ export default function Index() {
     const formatTMDBContent = (item) => {
         const isMovie = 'title' in item;
         const mainGenre = item.genre_ids[0] ? GENRE_MAP[item.genre_ids[0]] || 'Unknown' : 'Unknown';
-        console.log(`Formatting item: ${item.title || item.name}, Poster: ${item.poster_path}`);
         return {
             ...formatContent(item),
             genre: mainGenre
