@@ -3,7 +3,7 @@ const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
 const getApiKey = () => {
   return (
-    import.meta.env.VITE_TMDB_API_KEY || "NA"
+    import.meta.env.VITE_TMDB_API_KEY || "7076ebfb043164c03de784f2a8b084f9"
   );
 };
 
